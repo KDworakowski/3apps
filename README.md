@@ -2,12 +2,8 @@
 ## Setup
 ### Clone Repository
 `git clone https://github.com/KDworakowski/3apps`
-### Run Listener
-`cd listener && ./listener.py`
-### Run Producer
-`cd producer && uvicorn api:app --host 0.0.0.0 --port 80`
-### Run GetSize
-`cd getSize && uvicorn api:app --host 0.0.0.0 --port 90`
+### Run the app in Docker
+`docker-compose up --build`
 ## Sending Requests
 Producer requests: `http://localhost:80/docs`
 

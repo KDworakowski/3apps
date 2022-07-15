@@ -26,7 +26,7 @@ async def read_root():
 
 
 async def send_rabbitmq(msg = {}):
-    connection = await connect("amqp://guest:guest@localhost/")
+    connection = await connect("amqp://guest:guest@host.docker.internal/")
 
     channel = await connection.channel()
 
@@ -55,8 +55,6 @@ async def add_tasks(
         }
     )
 ):
-    if not Task:
-        raise HTTPException(status_code=400, detail="Bad request")
     global successful_tasks
 
     await send_rabbitmq(task)

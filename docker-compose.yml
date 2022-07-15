@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  producer:
+    build: ./producer
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/code
+    depends_on:
+      - listener
+    ports:
+      - 80:80
+  listener:
+    build: ./listener
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/code
+  getsize:
+    build: ./getsize
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/code
+    depends_on:
+      - listener
+    ports:
+      - 90:90

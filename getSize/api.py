@@ -10,7 +10,7 @@ app = FastAPI()
 def get_stats():
     # Create a connection to MongoDB and create DB
 
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    myclient = pymongo.MongoClient("mongodb://host.docker.internal:27017/")
     db = myclient.database_sample
     my_collection = db["database"]
 

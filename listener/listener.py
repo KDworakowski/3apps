@@ -7,7 +7,7 @@ import pymongo
 
 
 async def on_message(message: IncomingMessage):
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    myclient = pymongo.MongoClient("mongodb://host.docker.internal:27017/")
     db = myclient.database_sample
     my_collection = db["database"]
 
@@ -22,7 +22,7 @@ async def on_message(message: IncomingMessage):
 async def main(loop):
 
 
-    connection = await connect("amqp://guest:guest@localhost/", loop = loop)
+    connection = await connect("amqp://guest:guest@host.docker.internal/", loop = loop)
 
     channel = await connection.channel()
 
