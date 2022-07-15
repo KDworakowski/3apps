@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import asyncio
 from aio_pika import connect, IncomingMessage
 import json

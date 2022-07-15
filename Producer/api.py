@@ -1,10 +1,14 @@
-from fastapi import FastAPI, Body
+from doctest import Example
+from fastapi import FastAPI, Body, HTTPException
 from pydantic import BaseModel
 from starlette.responses import HTMLResponse
 from aio_pika import connect, Message
 from typing import Dict
 import json
 
+
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import PlainTextResponse
 app = FastAPI()
 
 successful_tasks = 0
@@ -33,6 +37,9 @@ async def send_rabbitmq(msg = {}):
 
     await connection.close()
 
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    return PlainTextResponse(str(exc), status_code=400)
 
 @app.post("/AddTasks")
 async def add_tasks(
@@ -48,6 +55,8 @@ async def add_tasks(
         }
     )
 ):
+    if not Task:
+        raise HTTPException(status_code=400, detail="Bad request")
     global successful_tasks
 
     await send_rabbitmq(task)

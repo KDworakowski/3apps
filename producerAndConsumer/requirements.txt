@@ -1,5 +1,0 @@
-fastapi
-pydantic
-starlette
-aio_pika
-pymongo

@@ -2,3 +2,4 @@ fastapi
 pydantic
 starlette
 aio_pika
+uvicorn
