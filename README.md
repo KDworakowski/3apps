@@ -1,3 +1,4 @@
+![Optional_Text](../master/docs/docs.drawio.png)
 # Setup
 ### Clone Repository
 `git clone https://github.com/KDworakowski/3apps`
