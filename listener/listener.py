@@ -4,7 +4,7 @@ import asyncio
 from aio_pika import connect, IncomingMessage
 import json
 import pymongo
-
+import datetime
 
 async def on_message(message: IncomingMessage):
     myclient = pymongo.MongoClient("mongodb://host.docker.internal:27017/")
@@ -14,7 +14,9 @@ async def on_message(message: IncomingMessage):
     txt = message.body.decode("utf-8")
 
     data = json.loads(txt)
-    my_collection.insert_one(data)
+    timestamp = datetime.datetime.utcnow()
+    my_collection.create_index("date", expireAfterSeconds=60)
+    my_collection.insert_one(data | {"date": timestamp})
 
     print(json.loads(txt))
 
