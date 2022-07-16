@@ -11,9 +11,11 @@ Producer requests: `http://localhost:80/docs`
 
 GetSize requests: `http://localhost:90/docs`
 ## Producer
-Producer allows you to send JSON add request to RabbitMQ
+Producer allows you to send JSON Post request to RabbitMQ.
+## Listener
+Listener listens on RabbitMQ queue, after it receive the data it will add the timestamp to the data and insert the data to MongoDB.
 ## GetSize
-GetSize allows you to get the amount of objects stored in MongoDB
+GetSize allows you to send Get request to receive the amount of objects stored in MongoDB.
 # RabbitMQ Installation
 You can install it using any package manager like apt or brew on macOS.
 
