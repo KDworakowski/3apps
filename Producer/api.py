@@ -1,10 +1,12 @@
 from doctest import Example
+from os import getenv
 from fastapi import FastAPI, Body, HTTPException
 from pydantic import BaseModel
 from starlette.responses import HTMLResponse
 from aio_pika import connect, Message
 from typing import Dict
 import json
+import os
 
 
 from fastapi.exceptions import RequestValidationError
@@ -12,10 +14,6 @@ from fastapi.responses import PlainTextResponse
 app = FastAPI()
 
 successful_tasks = 0
-
-RABBITMQ_URL="amqp://guest:guest@localhost/"
-RABBIT_ROUTING="fastapi_task"
-
 class Task(BaseModel):
     taskid: str
     description: str
@@ -28,13 +26,13 @@ async def read_root():
 
 
 async def send_rabbitmq(msg = {}):
-    connection = await connect(RABBITMQ_URL)
+    connection = await connect(os.getenv("RABBITMQ_URL", "amqp://guest:guest@localhost/" ))
 
     channel = await connection.channel()
 
     await channel.default_exchange.publish(
         Message(json.dumps(msg.dict()).encode("utf-8")),
-        routing_key = RABBIT_ROUTING
+        routing_key = os.getenv("RABBIT_ROUTING", "fastapi_task")
     )
 
     await connection.close()

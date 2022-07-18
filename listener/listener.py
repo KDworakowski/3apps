@@ -5,12 +5,9 @@ from aio_pika import connect, IncomingMessage
 import json
 import pymongo
 import datetime
+import os
 
-MONGODB_URL="mongodb://localhost:27017/"
-RABBITMQ_URL="amqp://guest:guest@localhost/"
-RABBIT_ROUTING="fastapi_task"
-
-myclient = pymongo.MongoClient(MONGODB_URL)
+myclient = pymongo.MongoClient(os.getenv("MONGODB_URL", "mongodb://localhost:27017/"))
 db = myclient.database_sample
 my_collection = db["database"]
 
@@ -28,11 +25,11 @@ async def on_message(message: IncomingMessage):
 async def main(loop):
 
 
-    connection = await connect(RABBITMQ_URL, loop = loop)
+    connection = await connect(os.getenv("RABBITMQ_URL", "amqp://guest:guest@localhost/"), loop = loop)
 
     channel = await connection.channel()
 
-    queue = await channel.declare_queue(RABBIT_ROUTING)
+    queue = await channel.declare_queue(os.getenv("RABBIT_ROUTING", "fastapi_task"))
 
     await queue.consume(on_message, no_ack = True)
 

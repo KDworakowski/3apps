@@ -19,6 +19,10 @@ services:
     tty: true
     volumes:
       - .:/code
+    environment:
+      - MONGODB_URL=mongodb://host.docker.internal:27017/
+      - RABBITMQ_URL=amqp://guest:guest@host.docker.internal/
+      - RABBITMQ_ROUTING=fastapi_task
   getsize:
     build: ./getsize
     stdin_open: true
@@ -29,3 +33,5 @@ services:
       - listener
     ports:
       - 90:90
+    environment:
+      - MONGODB_URL=mongodb://host.docker.internal:27017/

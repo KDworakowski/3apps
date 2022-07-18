@@ -3,14 +3,13 @@
 # hypercorn main:app --bind 0.0.0.0:80
 from fastapi import FastAPI
 import pymongo
+import os
 
 app = FastAPI()
 
-MONGODB_URL="mongodb://localhost:27017/"
-
 # Create a connection to MongoDB and create DB
 
-myclient = pymongo.MongoClient(MONGODB_URL)
+myclient = pymongo.MongoClient(os.getenv("MONGODB_URL", "mongodb://localhost:27017/"))
 db = myclient.database_sample
 my_collection = db["database"]
 
