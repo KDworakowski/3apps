@@ -26,7 +26,7 @@ async def read_root():
 
 
 async def send_rabbitmq(msg = {}):
-    connection = await connect("amqp://guest:guest@host.docker.internal/")
+    connection = await connect("amqp://guest:guest@localhost/")
 
     channel = await connection.channel()
 
@@ -41,7 +41,7 @@ async def send_rabbitmq(msg = {}):
 async def validation_exception_handler(request, exc):
     return PlainTextResponse(str(exc), status_code=400)
 
-@app.post("/AddTasks")
+@app.post("/add")
 async def add_tasks(
     task: Task = Body(
         ...,
