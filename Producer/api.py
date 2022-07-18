@@ -13,6 +13,8 @@ app = FastAPI()
 
 successful_tasks = 0
 
+RABBITMQ_URL="amqp://guest:guest@localhost/"
+RABBIT_ROUTING="fastapi_task"
 
 class Task(BaseModel):
     taskid: str
@@ -26,13 +28,13 @@ async def read_root():
 
 
 async def send_rabbitmq(msg = {}):
-    connection = await connect("amqp://guest:guest@localhost/")
+    connection = await connect(RABBITMQ_URL)
 
     channel = await connection.channel()
 
     await channel.default_exchange.publish(
         Message(json.dumps(msg.dict()).encode("utf-8")),
-        routing_key = "fastapi_task"
+        routing_key = RABBIT_ROUTING
     )
 
     await connection.close()

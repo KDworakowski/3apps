@@ -6,7 +6,11 @@ import json
 import pymongo
 import datetime
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+MONGODB_URL="mongodb://localhost:27017/"
+RABBITMQ_URL="amqp://guest:guest@localhost/"
+RABBIT_ROUTING="fastapi_task"
+
+myclient = pymongo.MongoClient(MONGODB_URL)
 db = myclient.database_sample
 my_collection = db["database"]
 
@@ -24,11 +28,11 @@ async def on_message(message: IncomingMessage):
 async def main(loop):
 
 
-    connection = await connect("amqp://guest:guest@localhost/", loop = loop)
+    connection = await connect(RABBITMQ_URL, loop = loop)
 
     channel = await connection.channel()
 
-    queue = await channel.declare_queue("fastapi_task")
+    queue = await channel.declare_queue(RABBIT_ROUTING)
 
     await queue.consume(on_message, no_ack = True)
 

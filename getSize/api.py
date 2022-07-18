@@ -6,13 +6,16 @@ import pymongo
 
 app = FastAPI()
 
+MONGODB_URL="mongodb://localhost:27017/"
+
+# Create a connection to MongoDB and create DB
+
+myclient = pymongo.MongoClient(MONGODB_URL)
+db = myclient.database_sample
+my_collection = db["database"]
+
 @app.get("/GetStats")
 def get_stats():
-    # Create a connection to MongoDB and create DB
-
-    myclient = pymongo.MongoClient("mongodb://host.docker.internal:27017/")
-    db = myclient.database_sample
-    my_collection = db["database"]
 
     # Count number of documents in database
     numberOfDocs = my_collection.count_documents({})

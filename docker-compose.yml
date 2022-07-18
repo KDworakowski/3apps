@@ -10,6 +10,9 @@ services:
       - listener
     ports:
       - 80:80
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@host.docker.internal/
+      - RABBITMQ_ROUTING=fastapi_task
   listener:
     build: ./listener
     stdin_open: true
