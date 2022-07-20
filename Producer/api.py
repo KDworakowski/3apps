@@ -1,9 +1,6 @@
-from doctest import Example
-from os import getenv
-from fastapi import FastAPI, Body, HTTPException
+from fastapi import FastAPI, Body
 from pydantic import BaseModel
 from starlette.responses import HTMLResponse
-from aio_pika import connect, Message
 from typing import Dict
 import json
 import os
