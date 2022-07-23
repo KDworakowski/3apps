@@ -1,5 +1,5 @@
 fastapi
 pydantic
 starlette
-aio_pika
+pika
 uvicorn
