@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   producer:
+    # build: ./producer
     image: 3appscr.azurecr.io/producer
     stdin_open: true
     tty: true
@@ -14,6 +15,7 @@ services:
       - RABBITMQ_HOST=host.docker.internal
       - RABBITMQ_ROUTING=fastapi_task
   listener:
+    # build: ./listener
     image: 3appscr.azurecr.io/listener
     stdin_open: true
     tty: true
@@ -24,6 +26,7 @@ services:
       - RABBITMQ_URL=amqp://guest:guest@host.docker.internal/
       - RABBITMQ_ROUTING=fastapi_task
   getsize:
+    # build: ./getSize
     image: 3appscr.azurecr.io/getsize
     stdin_open: true
     tty: true
