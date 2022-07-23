@@ -2,7 +2,7 @@
 while true
 do
 curl -X 'POST' \
-  'http://localhost/add' \
+  'http://localhost:80/add' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
