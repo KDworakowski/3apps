@@ -12,7 +12,8 @@ from fastapi.responses import PlainTextResponse
 app = FastAPI()
 
 successful_tasks = 0
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=(os.getenv("RABBITMQ_HOST", "localhost"))))
+credentials = pika.PlainCredentials('admin', 'password')
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=(os.getenv("RABBITMQ_HOST", "localhost")),credentials=credentials))
 channel = connection.channel()
 class Task(BaseModel):
     taskid: str
