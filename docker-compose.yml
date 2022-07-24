@@ -1,8 +1,8 @@
 version: "3.8"
 services:
   producer:
-    # build: ./producer
-    image: 3appscr.azurecr.io/producer
+    build: ./producer
+    # image: 3appscr.azurecr.io/producer
     stdin_open: true
     tty: true
     volumes:
@@ -15,19 +15,19 @@ services:
       - RABBITMQ_HOST=host.docker.internal
       - RABBITMQ_ROUTING=fastapi_task
   listener:
-    # build: ./listener
-    image: 3appscr.azurecr.io/listener
+    build: ./listener
+    # image: 3appscr.azurecr.io/listener
     stdin_open: true
     tty: true
     volumes:
       - .:/code
     environment:
       - MONGODB_URL=mongodb://host.docker.internal:27017/
-      - RABBITMQ_URL=amqp://guest:guest@host.docker.internal/
+      - RABBITMQ_URL=amqp://admin:password@host.docker.internal/
       - RABBITMQ_ROUTING=fastapi_task
   getsize:
-    # build: ./getSize
-    image: 3appscr.azurecr.io/getsize
+    build: ./getSize
+    # image: 3appscr.azurecr.io/getsize
     stdin_open: true
     tty: true
     volumes:
