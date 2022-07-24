@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 3apps-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /add
+        pathType: Prefix
+        backend:
+          service:
+            name: producer
+            port:
+              number: 80
+      - path: /getsize
+        pathType: Prefix
+        backend:
+          service:
+            name: getsize
+            port:
+              number: 90

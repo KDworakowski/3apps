@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: getsize
+  name: getsize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: getsize
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: getsize
+    spec:
+      containers:
+        - env:
+            - name: MONGODB_URL
+              value: mongodb://20.199.42.59:27017/
+          image: 3appscr.azurecr.io/getsize
+          name: getsize
+          ports:
+            - containerPort: 90
+          resources: {}
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /code
+              name: getsize-claim0
+      restartPolicy: Always
+      volumes:
+        - name: getsize-claim0
+          persistentVolumeClaim:
+            claimName: getsize-claim0
+status: {}
