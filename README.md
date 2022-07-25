@@ -16,7 +16,7 @@
 
 **BEFORE RUNNING THE APP MAKE SURE YOU HAVE RABBITMQ AND MONGODB INSTALLED AND TURNED ON**
 # Sending Requests
-(producer)Put add requests: `http://localhost:80/add`
+(producer)Post add requests: `http://localhost:80/add`
 
 (getSize)Get size requests: `http://localhost:90/size`
 ## Producer
