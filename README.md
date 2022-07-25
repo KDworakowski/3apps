@@ -2,6 +2,15 @@
 # Setup
 ### Clone Repository
 `git clone https://github.com/KDworakowski/3apps`
+### Setup ENV variables in docker-compose.yaml
+```
+- RABBITMQ_HOST=rabbitmq_host
+- RABBITMQ_ROUTING=rabbitmq_routing
+- RABBITMQ_USER=rabbitmq_user
+- RABBITMQ_PASSWORD=rabbitmq_password
+- MONGODB_URL=mongodb://mongodb_host:27017/
+- RABBITMQ_URL=amqp://rabbitmq_user:rabbitmq_password@rabbitmq_host/
+```
 ### Run the app in Docker
 `docker-compose up --build`
 
