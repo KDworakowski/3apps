@@ -16,9 +16,9 @@
 
 **BEFORE RUNNING THE APP MAKE SURE YOU HAVE RABBITMQ AND MONGODB INSTALLED AND TURNED ON**
 # Sending Requests
-Producer requests: `http://localhost:80/docs`
+(producer)Put add requests: `http://localhost:80/add`
 
-GetSize requests: `http://localhost:90/docs`
+(getSize)Get size requests: `http://localhost:90/size`
 ## Producer
 Producer allows you to send JSON Post request to RabbitMQ.
 ## Listener
