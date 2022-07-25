@@ -1,6 +1,6 @@
 FROM python:3.9
 WORKDIR /
-COPY . /
+COPY listener.py requirements.txt /
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 RUN groupadd -r user && useradd -r -g user user
 USER user
