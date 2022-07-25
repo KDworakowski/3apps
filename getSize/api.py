@@ -13,7 +13,7 @@ myclient = pymongo.MongoClient(os.getenv("MONGODB_URL", "mongodb://localhost:270
 db = myclient.database_sample
 my_collection = db["database"]
 
-@app.get("/GetStats")
+@app.get("/size")
 def get_stats():
 
     # Count number of documents in database
