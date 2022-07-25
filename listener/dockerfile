@@ -1,6 +1,5 @@
 FROM python:3.9
 WORKDIR /
 COPY . /
-RUN pip install -r requirements.txt
-# RUN python listener.py
+RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 CMD python listener.py
