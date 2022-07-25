@@ -14,6 +14,8 @@ services:
     environment:
       - RABBITMQ_HOST=host.docker.internal
       - RABBITMQ_ROUTING=fastapi_task
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASSWORD=password
   listener:
     build: ./listener
     # image: 3appscr.azurecr.io/listener
