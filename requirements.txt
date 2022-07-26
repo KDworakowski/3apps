@@ -1,7 +1,7 @@
 fastapi
 pydantic
 starlette
-typing
-pytest
+pika
+uvicorn
 pytest-repeat
 requests
