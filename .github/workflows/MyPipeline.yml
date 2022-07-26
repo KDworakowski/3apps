@@ -15,10 +15,20 @@ jobs:
           - 5672
 
     steps:
-    - name: Run Tests
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
       run: |
-        pip install -r requirements.txt && \
-        pytest -vv --count 100 --durations=16
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Testing the code with pytest
+      run: |
+        pytest -vv --count 1000 --durations=16
       env:
         RABBITMQ_HOST: 127.0.0.1
         RABBITMQ_ROUTING: fastapi_task
