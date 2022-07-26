@@ -17,7 +17,7 @@ jobs:
     steps:
     - name: Run Tests
       run: |
-        pip install -r requirements && \
+        pip install -r requirements.txt && \
         pytest -vv --count 100 --durations=16
       env:
         RABBITMQ_HOST: 127.0.0.1
