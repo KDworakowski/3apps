@@ -1,8 +1,0 @@
-fastapi
-pydantic
-starlette
-pika
-uvicorn
-pytest
-pytest-repeat
-requests
